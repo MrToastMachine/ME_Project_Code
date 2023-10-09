@@ -46,7 +46,7 @@ class Cone():
 
         if (self.start_angle < angle_to_object < self.end_angle):
             if (dist_two_points(mousePos, self.pos) <= view_range):
-                print(f"In view of sensor {self.id}")
+                # print(f"In view of sensor {self.id}")
                 self.showCone()
     
     @classmethod

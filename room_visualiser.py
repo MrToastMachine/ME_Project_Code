@@ -6,7 +6,7 @@ pygame.init()
 from Cone import *
 
 RES = (500, 400)
-FPS = 20
+FPS = 60
 
 win = pygame.display.set_mode(RES)
 clock = pygame.time.Clock()
@@ -50,10 +50,11 @@ s_cone_L = pygame.transform.flip(s_cone_A, 0, 1)
 
 
 # CREATE ALL CONE OBJECTS
+"""
 Cone_A = Cone(win, s_cone_A, (0,0), 0, 30, "A")
 Cone_B = Cone(win, s_cone_B, (0,0), 30, 60, "B")
 Cone_C = Cone(win, s_cone_C, (0,0), 60, 90, "C")
-
+"""
 Cone_D = Cone(win, s_cone_D, (RES[0],0), 90, 120, "D")
 Cone_E = Cone(win, s_cone_E, (RES[0],0), 120, 150, "E")
 Cone_F = Cone(win, s_cone_F, (RES[0],0), 150, 180, "F")
@@ -76,7 +77,7 @@ def update():
 
     win.fill(BLACK)
     Cone.checkAllSensors()
-    # print(f"Mouse Pos: {mouse}")
+    pygame.draw.circle(win, GREEN, mouse, 5)
 
 
 run = True
