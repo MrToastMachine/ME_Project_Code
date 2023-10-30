@@ -53,13 +53,3 @@ class Cone():
     def checkAllSensors(cls):
         for sensor in cls.sensors:
             sensor.checkSensorTriggered()
-
-
-
-if __name__ == "__main__":
-    x = 12
-    if (2 < x < 10):
-        print("OY")
-    else:
-        print("Norway")
-
