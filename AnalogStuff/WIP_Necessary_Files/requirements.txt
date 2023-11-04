@@ -1,3 +1,0 @@
-kivy
-matplotlib
-Pillow
