@@ -48,11 +48,11 @@ void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) 
   Serial.println();
 }
 
-float getSensorData()
-
 void setup() {
   //Initialize Serial Monitor
   Serial.begin(115200);
+
+  Serial.println("Lets gooo!");
   
   //Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
@@ -77,5 +77,5 @@ void loop() {
   int board3X = boardsStruct[2].x;
   int board3Y = boardsStruct[2].y;*/
 
-  delay(5000);  
+  delay(3000);  
 }

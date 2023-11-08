@@ -19,8 +19,14 @@ Sender code:
 #include <esp_now.h>
 #include <WiFi.h>
 
+// US Sensor Info
+const int trigPin = 5;
+const int echoPin = 6;
+
+float distance = 0.0;
+
 // REPLACE WITH THE RECEIVER'S MAC Address
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[] = {0x58, 0xCF, 0x79, 0xDB, 0x11, 0x24};
 
 // Structure example to send data
 // Must match the receiver structure
@@ -41,10 +47,29 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.print("\r\nLast Packet Send Status:\t");
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
+
+float getSensorData(){
+  float echoTime;
+  float calcDist;
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  echoTime = pulseIn(echoPin, HIGH);
+
+  calcDist = echoTime / 148.0;
+
+  return calcDist;
+}
  
 void setup() {
   // Init Serial Monitor
   Serial.begin(115200);
+
+  // sensor setup
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
@@ -74,7 +99,7 @@ void setup() {
 void loop() {
   // Set values to send
   myData.id = 1;
-  myData.x = random(0,50);
+  myData.x = getSensorData();
   myData.y = random(0,50);
 
   // Send message via ESP-NOW
@@ -86,5 +111,5 @@ void loop() {
   else {
     Serial.println("Error sending the data");
   }
-  delay(10000);
+  delay(3000);
 }
