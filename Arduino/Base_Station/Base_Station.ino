@@ -14,17 +14,18 @@
 
 // Structure example to receive data
 // Must match the sender structure
-typedef struct struct_message {
+typedef struct sensor_data {
   int id;
-  int x;
-  int y;
-}struct_message;
+  float sensor_A;
+  float sensor_B;
+  float sensor_C;
+}sensor_data;
 
 // Create a struct_message called myData
-struct_message myData;
+sensor_data myData;
 
 // Create a structure to hold the readings from each board
-struct_message board1;
+sensor_data board1;
 
 // Create an array with all the structures
 // struct_message boardsStruct[3] = {board1, board2, board3};
@@ -41,10 +42,16 @@ void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) 
   memcpy(&myData, incomingData, sizeof(myData));
   Serial.printf("Board ID %u: %u bytes\n", myData.id, len);
   // Update the structures with the new incoming data
-  board1.x = myData.x;
-  board1.y = myData.y;
-  Serial.printf("x value: %d \n", board1.x);
-  Serial.printf("y value: %d \n", board1.y);
+  board1.sensor_A = myData.sensor_A;
+  board1.sensor_B = myData.sensor_B;
+  board1.sensor_C = myData.sensor_C;
+
+  Serial.print("Sensor A value: ");
+  Serial.println(board1.sensor_A);
+  Serial.print("Sensor B value: ");
+  Serial.println(board1.sensor_B);
+  Serial.print("Sensor C value: ");
+  Serial.println(board1.sensor_C);
   Serial.println();
 }
 

@@ -20,24 +20,33 @@ Sender code:
 #include <WiFi.h>
 
 // US Sensor Info
-const int trigPin = 5;
-const int echoPin = 6;
+const int trigPin_A = 4;
+const int echoPin_A = 5;
 
-float distance = 0.0;
+const int trigPin_B = 6;
+const int echoPin_B = 7;
+
+const int trigPin_C = 1;
+const int echoPin_C = 2;
+
+float distance_A = 0.0;
+float distance_B = 0.0;
+float distance_C = 0.0;
 
 // REPLACE WITH THE RECEIVER'S MAC Address
 uint8_t broadcastAddress[] = {0x58, 0xCF, 0x79, 0xDB, 0x11, 0x24};
 
 // Structure example to send data
 // Must match the receiver structure
-typedef struct struct_message {
+typedef struct sensor_data {
     int id; // must be unique for each sender board
-    int x;
-    int y;
-} struct_message;
+    float sensor_A;
+    float sensor_B;
+    float sensor_C;
+} sensor_data;
 
 // Create a struct_message called myData
-struct_message myData;
+sensor_data myData;
 
 // Create peer interface
 esp_now_peer_info_t peerInfo;
@@ -48,7 +57,7 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
 }
 
-float getSensorData(){
+float getSensorData(int trigPin, int echoPin){
   float echoTime;
   float calcDist;
 
@@ -58,18 +67,28 @@ float getSensorData(){
 
   echoTime = pulseIn(echoPin, HIGH);
 
-  calcDist = echoTime / 148.0;
+  calcDist = echoTime * 0.034 / 2;
 
+  Serial.println("----- Sensor Data -----");
+  Serial.println(calcDist);
+  
   return calcDist;
 }
  
 void setup() {
   // Init Serial Monitor
   Serial.begin(115200);
+  Serial.println("Beginning Program...");
 
   // sensor setup
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  pinMode(trigPin_A, OUTPUT);
+  pinMode(echoPin_A, INPUT);
+
+  pinMode(trigPin_B, OUTPUT);
+  pinMode(echoPin_B, INPUT);
+
+  pinMode(trigPin_C, OUTPUT);
+  pinMode(echoPin_C, INPUT);
 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
@@ -99,8 +118,9 @@ void setup() {
 void loop() {
   // Set values to send
   myData.id = 1;
-  myData.x = getSensorData();
-  myData.y = random(0,50);
+  myData.sensor_A = getSensorData(trigPin_A, echoPin_A);
+  myData.sensor_B = getSensorData(trigPin_B, echoPin_B);
+  myData.sensor_C = getSensorData(trigPin_C, echoPin_C);
 
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));

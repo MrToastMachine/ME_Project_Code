@@ -14,13 +14,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println("Got here!!!");
   distance = getDistance();
   Serial.print("Distance: ");
   Serial.print(distance);
   Serial.println(" cm");
 
-  delay(50);
+  delay(1000);
 
 }
 
@@ -34,7 +33,7 @@ float getDistance(){
 
   echoTime = pulseIn(echoPin, HIGH);
 
-  calcDist = echoTime / 148.0;
+  calcDist = echoTime * 0.034 / 2;
 
   return calcDist;
 
