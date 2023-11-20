@@ -74,6 +74,24 @@ float getSensorData(int trigPin, int echoPin){
   
   return calcDist;
 }
+
+// When request recieved from base station board
+void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len){
+  myData.id = 1;
+  myData.sensor_A = getSensorData(trigPin_A, echoPin_A);
+  myData.sensor_B = getSensorData(trigPin_B, echoPin_B);
+  myData.sensor_C = getSensorData(trigPin_C, echoPin_C);
+
+  // Send message via ESP-NOW
+  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
+   
+  if (result == ESP_OK) {
+    Serial.println("Sent with success");
+  }
+  else {
+    Serial.println("Error sending the data");
+  }
+}
  
 void setup() {
   // Init Serial Monitor
@@ -102,6 +120,7 @@ void setup() {
   // Once ESPNow is successfully Init, we will register for Send CB to
   // get the status of Trasnmitted packet
   esp_now_register_send_cb(OnDataSent);
+  esp_now_register_recv_cb(OnDataRecv);
   
   // Register peer
   memcpy(peerInfo.peer_addr, broadcastAddress, 6);
@@ -117,6 +136,7 @@ void setup() {
  
 void loop() {
   // Set values to send
+  /*
   myData.id = 1;
   myData.sensor_A = getSensorData(trigPin_A, echoPin_A);
   myData.sensor_B = getSensorData(trigPin_B, echoPin_B);
@@ -132,4 +152,5 @@ void loop() {
     Serial.println("Error sending the data");
   }
   delay(3000);
+  */
 }

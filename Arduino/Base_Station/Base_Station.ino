@@ -1,16 +1,6 @@
-/*********
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp-now-many-to-one-esp32/
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files.
-  
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-*********/
-
 #include <esp_now.h>
 #include <WiFi.h>
+#include <ArduinoJson.h>
 
 // Structure example to receive data
 // Must match the sender structure
@@ -27,25 +17,56 @@ sensor_data myData;
 // Create a structure to hold the readings from each board
 sensor_data board1;
 
+// BOARD MAC ADDRESSES
+uint8_t board1_Address[] = {0x58, 0xCF, 0x79, 0xD7, 0x24, 0x6C};
+
+// Create peer interface
+esp_now_peer_info_t peerInfo_b1;
+
+int timestamp = 0;
+
+
+void SendJsonOverSerial(int board_id, int timestamp, float sensor_A, float sensor_B, float sensor_C){
+  const size_t capacity = JSON_OBJECT_SIZE(5);
+  StaticJsonDocument<capacity> data;
+  
+  data["board_id"] = board_id;
+  data["ts"] = timestamp;
+  data["sensor_A"] = sensor_A;
+  data["sensor_B"] = sensor_B;
+  data["sensor_C"] = sensor_C;
+
+  // Serialize JSON to a string
+  String jsonStr;
+  serializeJson(data, jsonStr);
+
+  // Send JSON packet over serial
+  Serial.println(jsonStr);
+}
+
 // Create an array with all the structures
 // struct_message boardsStruct[3] = {board1, board2, board3};
 
 // callback function that will be executed when data is received
 void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) {
   char macStr[18];
-  Serial.print("Packet received from: ");
+
+  timestamp = millis();
+
+  // Serial.print("Packet received from: ");
   // snprinf: Composes a string with the same text that would be printed if format was used on printf,
   // but instead of being printed, the content is stored as a C string
   snprintf(macStr, sizeof(macStr), "%02x:%02x:%02x:%02x:%02x:%02x",
            mac_addr[0], mac_addr[1], mac_addr[2], mac_addr[3], mac_addr[4], mac_addr[5]);
-  Serial.println(macStr);
+  //Serial.println(macStr);
   memcpy(&myData, incomingData, sizeof(myData));
-  Serial.printf("Board ID %u: %u bytes\n", myData.id, len);
+  //Serial.printf("Board ID %u: %u bytes\n", myData.id, len);
   // Update the structures with the new incoming data
   board1.sensor_A = myData.sensor_A;
   board1.sensor_B = myData.sensor_B;
   board1.sensor_C = myData.sensor_C;
 
+  /*
   Serial.print("Sensor A value: ");
   Serial.println(board1.sensor_A);
   Serial.print("Sensor B value: ");
@@ -53,6 +74,8 @@ void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) 
   Serial.print("Sensor C value: ");
   Serial.println(board1.sensor_C);
   Serial.println();
+  */
+  SendJsonOverSerial(myData.id, timestamp, board1.sensor_A,board1.sensor_B,board1.sensor_C);
 }
 
 void setup() {
@@ -73,16 +96,24 @@ void setup() {
   // Once ESPNow is successfully Init, we will register for recv CB to
   // get recv packer info
   esp_now_register_recv_cb(OnDataRecv);
+
+  // Register peers
+  memcpy(peerInfo_b1.peer_addr, board1_Address, 6);
+  peerInfo_b1.channel = 0;  
+  peerInfo_b1.encrypt = false;
+  
+  // Add peer        
+  if (esp_now_add_peer(&peerInfo_b1) != ESP_OK){
+    Serial.println("Failed to add board 1 peer");
+    return;
+  }
 }
  
 void loop() {
-  // Acess the variables for each board
-  /*int board1X = boardsStruct[0].x;
-  int board1Y = boardsStruct[0].y;
-  int board2X = boardsStruct[1].x;
-  int board2Y = boardsStruct[1].y;
-  int board3X = boardsStruct[2].x;
-  int board3Y = boardsStruct[2].y;*/
+  uint8_t mode = 1;
+
+  // Send message via ESP-NOW
+  esp_err_t result = esp_now_send(board1_Address, &mode, sizeof(mode));
 
   delay(3000);  
 }
