@@ -1,4 +1,6 @@
 import serial
+import time
+import json
 
 def InitSerialPort(com, baud):
     # com = args.COM_PORT
@@ -15,10 +17,37 @@ def InitSerialPort(com, baud):
 
     return sp
 
+
+def ParsePushData(ser):       
+    rcvBytes = 0
+
+    while (rcvBytes == 0):
+        # wait till we receive the complete buffer
+        rcvBytes = ser.in_waiting
+        time.sleep(1)
+
+    rcvData = ser.read(ser.in_waiting)
+
+    try:
+        # Remove leading 'b' and trailing '\r\n'
+        rcvData = rcvData.strip()
+        # Parse the JSON data
+        data = json.loads(rcvData)
+        
+    except json.JSONDecodeError as e:
+        print(f"Error parsing JSON: {e}")
+        print(rcvData)
+        return None
+
+    print(data)
+
 def main(com, baud):
     # parser = argparse_setup()
     # args = parser.parse_args()    
     ser = InitSerialPort(com, baud)
+
+    for i in range(5):
+        ParsePushData(ser)
 
     """
     # Look at PushDataParser.py for Metadata class
@@ -33,4 +62,4 @@ def main(com, baud):
     ser.close()      
 
 if __name__ == "__main__":
-    main('COM10', 115200)
+    main('COM5', 115200)

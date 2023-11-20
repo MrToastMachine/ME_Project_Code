@@ -81,8 +81,6 @@ void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) 
 void setup() {
   //Initialize Serial Monitor
   Serial.begin(115200);
-
-  Serial.println("Lets gooo!");
   
   //Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);

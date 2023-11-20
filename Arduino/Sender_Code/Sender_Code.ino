@@ -20,14 +20,14 @@ Sender code:
 #include <WiFi.h>
 
 // US Sensor Info
-const int trigPin_A = 4;
-const int echoPin_A = 5;
+const int trigPin_A = 1;
+const int echoPin_A = 2;
 
 const int trigPin_B = 6;
 const int echoPin_B = 7;
 
-const int trigPin_C = 1;
-const int echoPin_C = 2;
+const int trigPin_C = 4;
+const int echoPin_C = 5;
 
 float distance_A = 0.0;
 float distance_B = 0.0;
