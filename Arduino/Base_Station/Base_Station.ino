@@ -113,5 +113,5 @@ void loop() {
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(board1_Address, &mode, sizeof(mode));
 
-  delay(3000);  
+  delay(1000);  
 }
