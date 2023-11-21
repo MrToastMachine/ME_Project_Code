@@ -5,8 +5,12 @@ import json
 def InitSerialPort(com, baud):
     # com = args.COM_PORT
     print("Connecting to serial port " + com)
-    sp = serial.Serial(com)
-
+    try:
+        sp = serial.Serial(com)
+    except:
+        print(f"Could not connect to serial port {com}")
+        return False
+    
     # sp.baudrate = args.baudrate
     sp.baudrate = baud
     if sp.isOpen() == True :
@@ -32,14 +36,17 @@ def ParsePushData(ser):
         # Remove leading 'b' and trailing '\r\n'
         rcvData = rcvData.strip()
         # Parse the JSON data
-        data = json.loads(rcvData)
+        data = json.loads(rcvData)\
+        
+        print(data)
+        
+        return data
         
     except json.JSONDecodeError as e:
         print(f"Error parsing JSON: {e}")
         print(rcvData)
         return None
 
-    print(data)
 
 def main(com, baud):
     # parser = argparse_setup()

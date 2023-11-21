@@ -17,23 +17,32 @@ def dist_two_points(pointA, pointB):
 class Cone():
     sensors = []
 
-    def __init__(self, win, img, pos, start_ang, end_ang, letter_id):
+    def __init__(self, win, img, pos, start_ang, end_ang, letter_id, track_mouse=True):
         self.win = win
         self.img = img
         self.pos = pos
         self.start_angle = start_ang
         self.end_angle = end_ang
         self.id = letter_id
+        self.track_mouse = track_mouse
+        self.detection = False
         Cone.sensors.append(self)
-    
+
     def showCone(self):
         self.win.blit(self.img, [x - scale/2 for x in self.pos])
-        self.drawArc()
 
-    def drawArc(self):
+        if self.track_mouse:
+            dist_to_mouse = self.getDistToMouse()
+            self.drawArc(dist_to_mouse)
+
+    def getDistToMouse(self):
         mousePos = pygame.mouse.get_pos()
         dist_to_mouse = dist_two_points(mousePos, self.pos)
-        arc_rect = (self.pos[0] - dist_to_mouse, self.pos[1] - dist_to_mouse, 2*dist_to_mouse, 2*dist_to_mouse)
+        return dist_to_mouse
+
+    def drawArc(self, dist):
+        
+        arc_rect = (self.pos[0] - dist, self.pos[1] - dist, 2*dist, 2*dist)
         pygame.draw.arc(self.win, WHITE, arc_rect, -math.radians(self.end_angle), -math.radians(self.start_angle), 1)
 
     def angle_to_point(self, mousePos):
@@ -52,4 +61,9 @@ class Cone():
     @classmethod
     def checkAllSensors(cls):
         for sensor in cls.sensors:
-            sensor.checkSensorTriggered()
+            if sensor.track_mouse:
+                sensor.checkSensorTriggered()
+            else:
+                if sensor.detection and sensor.detection < 450:
+                    sensor.showCone()
+                    sensor.drawArc(sensor.detection)
