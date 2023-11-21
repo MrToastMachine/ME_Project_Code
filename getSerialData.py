@@ -28,7 +28,7 @@ def ParsePushData(ser):
     while (rcvBytes == 0):
         # wait till we receive the complete buffer
         rcvBytes = ser.in_waiting
-        time.sleep(1)
+        time.sleep(0.05)
 
     rcvData = ser.read(ser.in_waiting)
 

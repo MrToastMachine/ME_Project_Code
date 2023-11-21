@@ -1,6 +1,7 @@
 import pygame
 import math
 import time
+import threading
 
 from getSerialData import *
 from Cone import *
@@ -72,10 +73,15 @@ Cone_C = Cone(win, s_cone_C, (0,0), 60, 90, "C", False)
 
 
 def getSensorData():
-    data = ParsePushData(ser)
-    Cone_A.detection = data["sensor_A"]
-    Cone_B.detection = data["sensor_B"]
-    Cone_C.detection = data["sensor_C"]
+    while True:
+        data = ParsePushData(ser)
+        print(data)
+        try:
+            Cone_A.detection = data["sensor_A"]
+            Cone_B.detection = data["sensor_B"]
+            Cone_C.detection = data["sensor_C"]
+        except:
+            print("Failed to Load JSON Data")
 
 def adjust(x,y):
     return (x - scale/2, y - scale/2)
@@ -90,6 +96,10 @@ def update():
 
 ser = InitSerialPort("COM5", 115200)
 
+serial_data_thread = threading.Thread(target=getSensorData)
+print("Starting threading")
+serial_data_thread.start()
+
 run = True
 while run:
     clock.tick(FPS)
@@ -97,13 +107,11 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-    getSensorData()
-
-
 	#Do Stuff Here
     update()
     pygame.display.update()
 
+serial_data_thread.join()
 pygame.quit()
 
 

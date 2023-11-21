@@ -79,8 +79,11 @@ float getSensorData(int trigPin, int echoPin){
 void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len){
   myData.id = 1;
   myData.sensor_A = getSensorData(trigPin_A, echoPin_A);
+  delay(30);
   myData.sensor_B = getSensorData(trigPin_B, echoPin_B);
+  delay(30);
   myData.sensor_C = getSensorData(trigPin_C, echoPin_C);
+  delay(30);
 
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
