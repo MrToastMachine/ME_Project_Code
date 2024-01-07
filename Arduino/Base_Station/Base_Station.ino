@@ -1,3 +1,11 @@
+/*
+Base station code:
+- This code is uploaded to the board collecting data the other ESP32 boards 
+- The data is requested by the base station and collected when the
+     other boards send back the JSON packets
+
+*/
+
 #include <esp_now.h>
 #include <WiFi.h>
 #include <ArduinoJson.h>
@@ -24,6 +32,9 @@ uint8_t board1_Address[] = {0x58, 0xCF, 0x79, 0xD7, 0x24, 0x6C};
 esp_now_peer_info_t peerInfo_b1;
 
 int timestamp = 0;
+
+// time between polls from sensor boards, in ms
+int time_between_scans = 500;
 
 
 void SendJsonOverSerial(int board_id, int timestamp, float sensor_A, float sensor_B, float sensor_C){
@@ -66,15 +77,6 @@ void OnDataRecv(const uint8_t * mac_addr, const uint8_t *incomingData, int len) 
   board1.sensor_B = myData.sensor_B;
   board1.sensor_C = myData.sensor_C;
 
-  /*
-  Serial.print("Sensor A value: ");
-  Serial.println(board1.sensor_A);
-  Serial.print("Sensor B value: ");
-  Serial.println(board1.sensor_B);
-  Serial.print("Sensor C value: ");
-  Serial.println(board1.sensor_C);
-  Serial.println();
-  */
   SendJsonOverSerial(myData.id, timestamp, board1.sensor_A,board1.sensor_B,board1.sensor_C);
 }
 
@@ -113,5 +115,5 @@ void loop() {
   // Send message via ESP-NOW
   esp_err_t result = esp_now_send(board1_Address, &mode, sizeof(mode));
 
-  delay(1000);  
+  delay(time_between_scans);  
 }

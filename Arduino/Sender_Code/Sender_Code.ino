@@ -1,14 +1,3 @@
-/*********
-  Rui Santos
-  Complete project details at https://RandomNerdTutorials.com/esp-now-many-to-one-esp32/
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files.
-  
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
-*********/
-
 /*
 Sender code:
 - This code is uploaded to the board collecting data from sensors
@@ -138,22 +127,4 @@ void setup() {
 }
  
 void loop() {
-  // Set values to send
-  /*
-  myData.id = 1;
-  myData.sensor_A = getSensorData(trigPin_A, echoPin_A);
-  myData.sensor_B = getSensorData(trigPin_B, echoPin_B);
-  myData.sensor_C = getSensorData(trigPin_C, echoPin_C);
-
-  // Send message via ESP-NOW
-  esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
-   
-  if (result == ESP_OK) {
-    Serial.println("Sent with success");
-  }
-  else {
-    Serial.println("Error sending the data");
-  }
-  delay(3000);
-  */
 }
