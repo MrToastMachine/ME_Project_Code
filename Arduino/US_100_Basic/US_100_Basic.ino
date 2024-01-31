@@ -12,6 +12,17 @@ void setup() {
   pinMode(echoPin, INPUT);
 }
 
+void transmitSignal(){
+  while(true){
+    digitalWrite(trigPin, HIGH);
+    delay(2000);
+    Serial.println("Still going...");
+    digitalWrite(trigPin, LOW);
+    delay(1);
+
+  }
+}
+
 void loop() {
   // put your main code here, to run repeatedly:
   distance = getDistance();
@@ -19,7 +30,7 @@ void loop() {
   Serial.print(distance);
   Serial.println(" cm");
 
-  delay(1000);
+  delay(500);
 
 }
 
