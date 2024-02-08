@@ -34,9 +34,9 @@ def ParsePushData(ser):
 
     try:
         # Remove leading 'b' and trailing '\r\n'
-        rcvData = rcvData.strip()
+        data = rcvData.strip()
         # Parse the JSON data
-        data = json.loads(rcvData)\
+        # data = json.loads(rcvData)
         
         print(data)
         
