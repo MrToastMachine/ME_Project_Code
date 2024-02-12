@@ -38,7 +38,7 @@ def ParsePushData(ser):
         # Parse the JSON data
         # data = json.loads(rcvData)
         
-        print(data)
+        # print(data)
         
         return data
         
