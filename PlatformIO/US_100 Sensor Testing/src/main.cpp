@@ -84,8 +84,8 @@ void fetchData(){
   randomSeed(analogRead(0));
 
   for (int i = 0; i < num_datapoints; i++){
-    data[0][i] = random(100);
-    data[1][i] = micros();
+    data[0][i] = micros();
+    data[1][i] = random(100);
     delayMicroseconds(10);
   }
 }
@@ -96,9 +96,12 @@ void printData(){
   for (int i = 0; i < num_datapoints - 1; i++){
     Serial.print(data[0][i]);
     Serial.print(",");
-    // Serial.println(data[1][i]);
+    Serial.print(data[1][i]);
+    Serial.print(";");
   }
   Serial.print(data[0][num_datapoints - 1]);
+  Serial.print(",");
+  Serial.print(data[1][num_datapoints - 1]);
   Serial.print("]");
 }
 

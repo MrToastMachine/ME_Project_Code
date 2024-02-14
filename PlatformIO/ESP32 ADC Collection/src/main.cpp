@@ -2,10 +2,12 @@
 #include "driver/gpio.h"
 #include "driver/adc.h"
 
+void customPulseRead();
 void transmitSignal();
 void printTimestamps();
-void get_x_samples(int n_samples);
+void collectData();
 void sample(int sample_index);
+void printData();
 
 
 #define ADC_CHANNEL ADC1_CHANNEL_4
@@ -34,6 +36,8 @@ Put array here to hold sampled values
 int timestamps[num_samples] = {};
 int samples[num_samples] = {};
 
+int raw_data[2][num_samples];
+
 void setup() {
   Serial.begin(115200);
 
@@ -48,17 +52,22 @@ void setup() {
 }
 
 void loop() {
-  delay(5000);
+  customPulseRead();
+  delay(500);
+  printData();
 
-
-
-  // Serial.println("Collecting Data...");
-  get_x_samples(num_samples);
-  // print
-
-  // delay(100);
+  delay(3000);
 
   // printTimestamps();
+}
+
+void customPulseRead(){
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  
+  collectData();
+  
 }
 
 void transmitSignal(){
@@ -80,17 +89,19 @@ void printTimestamps() {
   }
 }
 
-void get_x_samples(int n_samples) {
+void collectData() {
   // last_us = micros();
 
-  for (int i = 0; i < n_samples; i++) {
+  for (int i = 0; i < num_samples; i++) {
     last_us = micros();
     while (micros() - last_us < period_us) {}
 
-    timestamps[i] = micros();
+    // timestamps[i] = micros();
 
+    raw_data[0][i] = micros();
+    raw_data[1][i] = adc1_get_raw(ADC_CHANNEL);
 
-    sample(i);
+    // sample(i);
   }
 }
 
@@ -98,7 +109,20 @@ void sample(int sample_index) {
   timestamps[sample_index] = micros();
 
   int readVal = adc1_get_raw(ADC_CHANNEL);
+  // Serial.println(readVal);
 
-  Serial.println(readVal);
+}
 
+void printData(){
+  Serial.print("[");
+  for (int i = 0; i < num_samples - 1; i++){
+    Serial.print(raw_data[0][i]);
+    Serial.print(",");
+    Serial.print(raw_data[1][i]);
+    Serial.print(";");
+  }
+  Serial.print(raw_data[0][num_samples - 1]);
+  Serial.print(",");
+  Serial.print(raw_data[1][num_samples - 1]);
+  Serial.print("]");
 }
