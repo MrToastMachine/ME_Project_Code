@@ -26,13 +26,6 @@ const int echoPin = 6;
 
 float distance = 0.0;
 
-
-/*
-Put array here to hold sampled values
-- Know length before sampling starts -> 4000
-- Can send entire array over Serial then maybe
-*/
-
 int timestamps[num_samples] = {};
 int samples[num_samples] = {};
 
@@ -41,8 +34,8 @@ int raw_data[2][num_samples];
 void setup() {
   Serial.begin(115200);
 
-  // pinMode(trigPin, OUTPUT);
-  // pinMode(echoPin, INPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
 
   adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
 
@@ -56,7 +49,7 @@ void loop() {
   delay(500);
   printData();
 
-  delay(3000);
+  delay(1000);
 
   // printTimestamps();
 }

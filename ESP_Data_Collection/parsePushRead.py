@@ -4,9 +4,8 @@ import matplotlib.pyplot as plt
 
 BYTES_TO_READ = 1
 
-def getSerialData(ser):
+def old_func():
     byte_read = ser.read(BYTES_TO_READ)
-    print(byte_read, type(byte_read))
 
     while (byte_read.decode('ascii')):
         if byte_read.decode('ascii') != "[":
@@ -15,7 +14,6 @@ def getSerialData(ser):
         else:
             break
 
-
     data = ser.read_until(b']')[:-1]
 
     data = data.decode('ascii')
@@ -23,20 +21,45 @@ def getSerialData(ser):
     # print(data)
     return data.split(";")
 
+def getSerialData(ser):
+    byte_read = ser.read(BYTES_TO_READ)
+    # print(byte_read, type(byte_read))
+
+    while (byte_read):
+        try:
+            byte_char = byte_read.decode('ascii')
+            if byte_char == "[":
+                data = ser.read_until(b']')[:-1]
+
+                data = data.decode('ascii')
+
+                # print(data)
+                return data.split(";")
+            
+            byte_read = ser.read(BYTES_TO_READ)
+
+        
+        except:
+            print(f"[Decode] Not ASCII... => byte read: {byte_read}")
+            byte_read = ser.read(BYTES_TO_READ)
+
+
+    data = ser.read_until(b']')[:-1]
+
+    data = data.decode('ascii')
+
+    return data.split(";")
+
 
 def plotData(df):
-    # Assuming you have a DataFrame named 'df' with columns 'ts' and 'data'
-    # Example DataFrame creation for illustration purposes
-    # Convert 'ts' column to datetime format
-    # df['ts'] = pd.to_datetime(df['ts'])
 
-    # Plot the data
     plt.plot(df['ts'], df['datapoints'], linestyle= '-', color='b')
 
     # Set labels and title
     plt.xlabel('Timestamp')
     plt.ylabel('Data')
     plt.title('Plot of Data over Time')
+    plt.grid(True)
 
     # Show the plot
     plt.show()
@@ -58,3 +81,4 @@ if __name__=="__main__":
     plotData(df)
 
     df.to_excel(data_file, index=False)
+    print("Completed write to excel file...")
