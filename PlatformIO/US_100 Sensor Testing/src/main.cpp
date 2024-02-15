@@ -40,6 +40,8 @@ void loop() {
 
 }
 
+
+
 void transmitSignal(){
   while(true){
     digitalWrite(trigPin, HIGH);
