@@ -4,22 +4,6 @@ import matplotlib.pyplot as plt
 
 BYTES_TO_READ = 1
 
-def old_func():
-    byte_read = ser.read(BYTES_TO_READ)
-
-    while (byte_read.decode('ascii')):
-        if byte_read.decode('ascii') != "[":
-            # wait till we receive the complete buffer
-            byte_read = ser.read(BYTES_TO_READ)
-        else:
-            break
-
-    data = ser.read_until(b']')[:-1]
-
-    data = data.decode('ascii')
-
-    # print(data)
-    return data.split(";")
 
 def getSerialData(ser):
     byte_read = ser.read(BYTES_TO_READ)
