@@ -2,12 +2,10 @@
 #include "driver/gpio.h"
 #include "driver/adc.h"
 
+float getRealDistance();
 void customPulseRead();
-void transmitSignal();
-void printTimestamps();
 void collectData();
-void sample(int sample_index);
-void printData();
+void printData(float real_dist);
 
 
 #define ADC_CHANNEL ADC1_CHANNEL_4
@@ -18,7 +16,7 @@ void printData();
 unsigned long last_us = 0L;
 int period_us = (int)(1000 / SAMPLE_FREQ);
 
-const int num_samples = 5000;
+const int num_samples = 3000;
 int read_val = 0;
 
 const int trigPin = 5;
@@ -45,13 +43,33 @@ void setup() {
 }
 
 void loop() {
+  distance = getRealDistance();
+  // Serial.print("[loop] distance: ");
+  // Serial.println(distance);
+  delay(1000);
   customPulseRead();
-  delay(500);
-  printData();
+  delay(100);
+  printData(distance);
 
   delay(1000);
 
   // printTimestamps();
+}
+
+float getRealDistance(){
+  float echoTime;
+  float calcDist;
+
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  echoTime = pulseIn(echoPin, HIGH);
+
+  calcDist = echoTime * 0.034 / 2;
+
+  return calcDist;
+
 }
 
 void customPulseRead(){
@@ -61,25 +79,6 @@ void customPulseRead(){
   
   collectData();
   
-}
-
-void transmitSignal(){
-  while(true){
-    digitalWrite(trigPin, HIGH);
-    delay(2000);
-    Serial.println("Still going...");
-    digitalWrite(trigPin, LOW);
-    delay(1);
-
-  }
-}
-
-void printTimestamps() {
-  // Serial.println("Printing Timestamps... ");
-  for (int i = 0; i < num_samples; i++) {
-    // Serial.print((String)i + " : ");
-    Serial.println(timestamps[i]);
-  }
 }
 
 void collectData() {
@@ -98,16 +97,13 @@ void collectData() {
   }
 }
 
-void sample(int sample_index) {
-  timestamps[sample_index] = micros();
-
-  int readVal = adc1_get_raw(ADC_CHANNEL);
-  // Serial.println(readVal);
-
-}
-
-void printData(){
+void printData(float real_dist){
   Serial.print("[");
+
+  // print actual dist from US-100
+  Serial.print(real_dist);
+  Serial.print(";");
+
   for (int i = 0; i < num_samples - 1; i++){
     Serial.print(raw_data[0][i]);
     Serial.print(",");

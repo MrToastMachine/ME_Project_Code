@@ -26,16 +26,16 @@ void setup() {
 }
 
 void loop() {
-  /* - Testing US-100 code
+  // - Testing US-100 code
   distance = getDistance();
   Serial.print("Distance: ");
   Serial.print(distance);
   Serial.println(" cm");
 
   delay(500);
-  */
+  
 
-  getRandomArray();
+  // getRandomArray();
 
 
 }
@@ -58,15 +58,19 @@ float getDistance(){
   float calcDist;
 
   digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(20);
   digitalWrite(trigPin, LOW);
 
   echoTime = pulseIn(echoPin, HIGH);
 
+  Serial.print("Echo Time: ");
+  Serial.println(echoTime);
+
   calcDist = echoTime * 0.034 / 2;
 
-  return calcDist;
+  // Serial.println(calcDist);
 
+  return calcDist;
 }
 
 void getRandomArray(){
