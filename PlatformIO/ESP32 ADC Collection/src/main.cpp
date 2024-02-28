@@ -6,6 +6,7 @@ float getRealDistance();
 void customPulseRead();
 void collectData();
 void printData(float real_dist);
+void teleplotData(float real_dist);
 
 
 #define ADC_CHANNEL ADC1_CHANNEL_4
@@ -35,7 +36,13 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
-  adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+  // old code - this uses esp32 adc library
+  // adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+  //set the resolution to 12 bits (0-4096)
+
+  analogReadResolution(12);
+
+  analogSetAttenuation(ADC_11db);
 
   Serial.println("Starting program");
   Serial.print("Period in us: ");
@@ -49,7 +56,8 @@ void loop() {
   delay(1000);
   customPulseRead();
   delay(100);
-  printData(distance);
+  // printData(distance);
+  teleplotData(distance);
 
   delay(1000);
 
@@ -92,6 +100,7 @@ void collectData() {
 
     raw_data[0][i] = micros();
     raw_data[1][i] = adc1_get_raw(ADC_CHANNEL);
+    
 
     // sample(i);
   }
@@ -114,4 +123,16 @@ void printData(float real_dist){
   Serial.print(",");
   Serial.print(raw_data[1][num_samples - 1]);
   Serial.print("]");
+}
+
+void teleplotData(float real_dist){
+  Serial.print("Real Distance: ");
+
+  // print actual dist from US-100
+  Serial.println(real_dist);
+
+  for (int i = 0; i < num_samples; i++){
+    Serial.print(">ADC Read:");
+    Serial.println(raw_data[1][i]);
+  }
 }
