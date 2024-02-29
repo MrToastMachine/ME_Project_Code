@@ -37,12 +37,12 @@ void setup() {
   pinMode(echoPin, INPUT);
 
   // old code - this uses esp32 adc library
-  // adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+  adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+
   //set the resolution to 12 bits (0-4096)
+  // analogReadResolution(12);
 
-  analogReadResolution(12);
-
-  analogSetAttenuation(ADC_11db);
+  // analogSetAttenuation(ADC_11db);
 
   Serial.println("Starting program");
   Serial.print("Period in us: ");
