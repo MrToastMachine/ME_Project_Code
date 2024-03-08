@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+void IRAM_ATTR OLD_reflectionDetect();
 void IRAM_ATTR reflectionDetect();
 float getRealDistance();
 void printIntTriggers();
@@ -13,11 +14,11 @@ float distance = 0.0;
 int trig_time = 0;
 int int_time = 0;
 
-const int buffer_len = 10;
+const int buffer_len = 1000;
 int interrupt_buffer[buffer_len];
 int current_buffer_pos = 0;
 
-void IRAM_ATTR reflectionDetect(){
+void IRAM_ATTR OLD_reflectionDetect(){
     if(current_buffer_pos < buffer_len){
         int now_time = micros();
         // if (now_time - trig_time > 2000){
@@ -27,6 +28,14 @@ void IRAM_ATTR reflectionDetect(){
                 current_buffer_pos++;
             }
         }
+    }
+}
+
+void IRAM_ATTR reflectionDetect(){
+    if(current_buffer_pos < buffer_len){
+        int now_time = micros();
+        interrupt_buffer[current_buffer_pos] = now_time;
+        current_buffer_pos++;
     }
 }
 
@@ -50,6 +59,18 @@ float getRealDistance(){
 
 }
 
+void printIntTriggers(){
+    Serial.print("[");
+    for (int i = 0; i < buffer_len - 1; i++){
+        if (interrupt_buffer[i] != 0){
+            Serial.print(interrupt_buffer[i]-trig_time);
+            Serial.print(",");
+        }
+    }
+    Serial.print(interrupt_buffer[buffer_len-1]-trig_time);
+    Serial.println("]");
+}
+
 void setup(){
     Serial.begin(115200);
 
@@ -59,19 +80,6 @@ void setup(){
     attachInterrupt(interruptPin, reflectionDetect, HIGH);
 
     Serial.println("\nStarting...");
-}
-
-void printIntTriggers(){
-    Serial.println("Times since ping:");
-    for (int i = 0; i < buffer_len; i++){
-        if (interrupt_buffer[i] != 0){
-            Serial.print("Interrupt #");
-            Serial.print(i);
-            Serial.print(" = ");
-            Serial.print(interrupt_buffer[i]-trig_time);
-            Serial.println(" uS");
-        }
-    }
 }
 
 
