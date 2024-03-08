@@ -102,7 +102,8 @@ def getSensorData(read_excel=False):
         dataframe = pd.read_excel('ESP_Output.xlsx')
     else:
         if not ser:
-            ser = InitSerialPort('/dev/tty.usbserial-1110', 115200)
+            # ser = InitSerialPort('/dev/tty.usbserial-1110', 115200)
+            ser = InitSerialPort('COM8', 115200)
 
         real_dist, dataframe = collectRawData(ser, write_to_excel=True)
 

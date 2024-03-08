@@ -1,12 +1,15 @@
 #include <Arduino.h>
 #include "driver/gpio.h"
 #include "driver/adc.h"
+#include <SPI.h>
 
 float getRealDistance();
 void customPulseRead();
 void collectData();
+void SPI_Collect_Data();
 void printData(float real_dist);
 void teleplotData(float real_dist);
+int readRegister();
 
 
 #define ADC_CHANNEL ADC1_CHANNEL_4
@@ -20,8 +23,8 @@ int period_us = (int)(1000 / SAMPLE_FREQ);
 const int num_samples = 3000;
 int read_val = 0;
 
-const int trigPin = 5;
-const int echoPin = 6;
+const int trigPin = 1;
+const int echoPin = 2;
 
 float distance = 0.0;
 
@@ -36,11 +39,16 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
+  // SPI Setup
+  pinMode(SS, OUTPUT);
+  SPI.begin();
+
+
   // old code - this uses esp32 adc library
-  adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+  // adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
 
   //set the resolution to 12 bits (0-4096)
-  // analogReadResolution(12);
+  analogReadResolution(12);
 
   // analogSetAttenuation(ADC_11db);
 
@@ -59,7 +67,7 @@ void loop() {
   // printData(distance);
   teleplotData(distance);
 
-  delay(1000);
+  delay(500);
 
   // printTimestamps();
 }
@@ -85,7 +93,7 @@ void customPulseRead(){
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   
-  collectData();
+  // SPI_Collect_Data();
   
 }
 
@@ -99,10 +107,22 @@ void collectData() {
     // timestamps[i] = micros();
 
     raw_data[0][i] = micros();
-    raw_data[1][i] = adc1_get_raw(ADC_CHANNEL);
+    raw_data[1][i] = analogReadMilliVolts(ADC_CHANNEL);
+
     
 
     // sample(i);
+  }
+}
+
+void SPI_Collect_Data(){
+  for (int i = 0; i < num_samples; i++){
+    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE1));
+    
+
+    raw_data[1][i] = readRegister();
+
+    SPI.endTransaction();
   }
 }
 
@@ -135,4 +155,23 @@ void teleplotData(float real_dist){
     Serial.print(">ADC Read:");
     Serial.println(raw_data[1][i]);
   }
+}
+
+int readRegister(){
+  byte upper_byte = 0;
+  byte lower_byte = 0;
+
+  digitalWrite(SS, LOW);
+
+  int result = SPI.transfer(0x00);
+
+  result = result << 8;
+
+  lower_byte = SPI.transfer(0x00);
+
+  result = result | lower_byte;
+
+  digitalWrite(SS, HIGH);
+
+  return result;
 }

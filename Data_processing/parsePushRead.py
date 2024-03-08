@@ -6,6 +6,7 @@ BYTES_TO_READ = 1
 
 
 def getSerialData(ser):
+    print(ser)
     byte_read = ser.read(BYTES_TO_READ)
     # print(byte_read, type(byte_read))
 

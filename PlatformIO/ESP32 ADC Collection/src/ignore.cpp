@@ -21,7 +21,7 @@ void setup() {
   
   //set the resolution to 12 bits (0-4096)
   analogReadResolution(12);
-  analogSetPinAttenuation(4, ADC_0db);
+  analogSetPinAttenuation(4, ADC_11db);
 
   Serial.println("Starting testing...");
 }
