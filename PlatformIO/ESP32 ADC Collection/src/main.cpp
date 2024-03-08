@@ -45,7 +45,7 @@ void setup() {
 
 
   // old code - this uses esp32 adc library
-  // adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
+  adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_11);
 
   //set the resolution to 12 bits (0-4096)
   analogReadResolution(12);
