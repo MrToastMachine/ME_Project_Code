@@ -33,9 +33,11 @@ void IRAM_ATTR OLD_reflectionDetect(){
 
 void IRAM_ATTR reflectionDetect(){
     if(current_buffer_pos < buffer_len){
-        int now_time = micros();
-        interrupt_buffer[current_buffer_pos] = now_time;
-        current_buffer_pos++;
+        int delta_time = micros() - trig_time;
+        if (delta_time < 30000 && delta_time > 0){
+            interrupt_buffer[current_buffer_pos] = delta_time;
+            current_buffer_pos++;
+        }
     }
 }
 
@@ -63,7 +65,7 @@ void printIntTriggers(){
     Serial.print("[");
     for (int i = 0; i < buffer_len - 1; i++){
         if (interrupt_buffer[i] != 0){
-            Serial.print(interrupt_buffer[i]-trig_time);
+            Serial.print(interrupt_buffer[i]);
             Serial.print(",");
         }
     }
@@ -85,8 +87,8 @@ void setup(){
 
 void loop(){
     distance = getRealDistance();
-    Serial.print("[Main] Distance: ");
-    Serial.println(distance);
+    // Serial.print("[Main] Distance: ");
+    // Serial.println(distance);
     delay(50);
 
     printIntTriggers();
