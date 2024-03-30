@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/mofa/Documents/College/ME_Project/ME_Project_Code/Arduino/libraries/ArduinoJson"
+    "cmake.sourceDirectory": "/Users/mofa/Documents/College/ME_Project/ME_Project_Code/Arduino/libraries/ArduinoJson",
+    "cmake.configureOnOpen": false
 }

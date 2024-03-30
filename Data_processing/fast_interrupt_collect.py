@@ -37,21 +37,21 @@ def getSerialData(ser):
 
 data_file = "ESP_Output.xlsx"
 
-def plotInterrupts(df):
+def plotInterrupts(data):
+    zeroes = np.zeros(len(data))
+
+    scaled_data = (data) / 1000
 
     # specifying the plot size
-    plt.figure(figsize = (20, 5))
-
-    plt.hist(df['datapoints'], bins=100, color='blue', edgecolor='black', alpha=0.7)
-
-    # for interrupt_time in df['datapoints']:
-    #     print(interrupt_time)
-    #     # only one line may be specified; full height
-    #     plt.axvline(x = interrupt_time, color = 'b', linestyle='-', linewidth=1)
-    #     # plt.xscale('linear')
-    #     # plt.xlim(0,30000)
-
-    # rendering plot
+    plt.figure()
+    plt.scatter(data,zeroes, c='g', marker='|',s=700)
+    plt.xlim(-3,30)
+    plt.title("Interrupt Timings (Pre-Clustering)", fontsize=18)
+    plt.xlabel("Time (ms)",fontsize=12, x=1.0)
+    plt.ylabel("Interrupt triggers",fontsize=14)
+    # plt.legend(["Interrupt Triggered"], loc="best")
+    # plt.yticks([])
+    # plt.grid()
     plt.show()
 
 
@@ -63,6 +63,10 @@ def collectRawData(ser, write_to_excel=False):
     # data = [int(y.split(',')) for y in raw_data]
     data = [int(x) for x in raw_data]
     print(f"Num interrupt times: {len(data)}")
+
+    print_interrupts = True
+    if print_interrupts:
+        print(data)
 
     df = pd.DataFrame({'datapoints': raw_data})
 
@@ -77,5 +81,7 @@ if __name__=="__main__":
 
     df = collectRawData(ser, True)
 
-    plotInterrupts(df)
+    df["datapoints"] = df["datapoints"].apply(int)
+
+    plotInterrupts(df["datapoints"][:-1])
 
