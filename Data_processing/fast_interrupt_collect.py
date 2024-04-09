@@ -44,7 +44,7 @@ def plotInterrupts(data):
 
     # specifying the plot size
     plt.figure()
-    plt.scatter(data,zeroes, c='g', marker='|',s=700)
+    plt.scatter(scaled_data,zeroes, c='g', marker='|',s=700)
     plt.xlim(-3,30)
     plt.title("Interrupt Timings (Pre-Clustering)", fontsize=18)
     plt.xlabel("Time (ms)",fontsize=12, x=1.0)
