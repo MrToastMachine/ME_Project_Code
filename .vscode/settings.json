@@ -1,4 +1,7 @@
 {
     "cmake.sourceDirectory": "/Users/mofa/Documents/College/ME_Project/ME_Project_Code/Arduino/libraries/ArduinoJson",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }
