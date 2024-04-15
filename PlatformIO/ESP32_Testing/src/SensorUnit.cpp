@@ -3,8 +3,9 @@ Operations:
     - Master Board (not this one) sends request over Wifi to this board
     - This board triggers and collects interrupts for each of its sensors
       sequentially
-    - The interrupts are parsed into objects and sizes (STRUCT???)
-    - Once collection and parsing complete, send 3 structs back to master
+    - The interrupts are parsed into objects and sizes
+        > Stored in sensor_data Struct called myData
+    - Once collection and parsing complete, send myData struct back to master
 
 Other Notes
     - Timestamps?
@@ -24,13 +25,17 @@ void pulseTrigPinX(int trigPin);
 double getDistFromMicros(int uS);
 void clearAllStoredData();
 void printAllInterrupts();
-void printObjectsDetected();
 //float getRealDistance();
 //void printIntTriggers();
 
+const int MAX_NUM_OBJECTS = 5;
+
 typedef struct objects_detected {
-    std::vector<int> object_starts{};
-    std::vector<int> object_sizes{};
+    // std::vector<int> object_starts{};
+    // std::vector<int> object_sizes{};
+
+    int object_starts[MAX_NUM_OBJECTS];
+    int object_sizes[MAX_NUM_OBJECTS];
 } objects_detected;
 
 typedef struct sensor_data {
@@ -64,19 +69,15 @@ int trig_time = 0;
 
 
 // OBJECT DETECTION PARAMETERS
-const int MAX_RANGE = 30000;
-const int MIN_RANGE = 2000;
+
+// For table test - max = 2m --> ~12 ms
+const int MAX_RANGE = 12000;
+const int MIN_RANGE = 2500;
 
 // min num interrupts to classify as object
-const int MIN_COUNT_FOR_OBJECT = 3;
+const int MIN_COUNT_FOR_OBJECT = 2;
 // max time allowed between interrupts to be part of same object
 const int MAX_DELTA = 30;
-
-
-//sensor_X_interrupt_times[0] => start times
-//sensor_X_interrupt_times[1] => lengths
-
-// std::vector<int> interrupt_times;
 
 
 // INTERRUPTS 
@@ -106,12 +107,17 @@ void parseInterruptsToObjects(objects_detected& obj_data_address){
     int current_object_start = interrupt_times[0];
 
     int count = 1;
+    int num_objs_detected = 0;
 
     for (int i = 1; i < NUM_INT_TIMES; i++){
         if (interrupt_times[i] == 0){
             if (count >= MIN_COUNT_FOR_OBJECT) {
-                obj_data_address.object_starts.push_back(current_object_start);
-                obj_data_address.object_sizes.push_back(interrupt_times[i-1] - current_object_start);
+                // obj_data_address.object_starts.push_back(current_object_start);
+                // obj_data_address.object_sizes.push_back(interrupt_times[i-1] - current_object_start);
+
+                obj_data_address.object_starts[num_objs_detected] = current_object_start;
+                obj_data_address.object_sizes[num_objs_detected] = (interrupt_times[i-1] - current_object_start);
+                num_objs_detected++;
 
                 // sensor_X_interrupt_times[0].push_back(current_object_start);
                 // sensor_X_interrupt_times[1].push_back(interrupt_times[sensor_X_interrupt_times[1].size()-1] - current_object_start);
@@ -126,8 +132,12 @@ void parseInterruptsToObjects(objects_detected& obj_data_address){
         }
         else {
             if (count >= MIN_COUNT_FOR_OBJECT){
-                obj_data_address.object_starts.push_back(current_object_start);
-                obj_data_address.object_sizes.push_back(interrupt_times[i-1] - current_object_start);
+                // obj_data_address.object_starts.push_back(current_object_start);
+                // obj_data_address.object_sizes.push_back(interrupt_times[i-1] - current_object_start);
+
+                obj_data_address.object_starts[num_objs_detected] = current_object_start;
+                obj_data_address.object_sizes[num_objs_detected] = (interrupt_times[i-1] - current_object_start);
+                num_objs_detected++;
 
                 // sensor_X_interrupt_times[0].push_back(current_object_start);
                 // sensor_X_interrupt_times[1].push_back(interrupt_times[i-1] - current_object_start);
@@ -139,8 +149,12 @@ void parseInterruptsToObjects(objects_detected& obj_data_address){
         
     }       
     if (count >= MIN_COUNT_FOR_OBJECT) {
-        obj_data_address.object_starts.push_back(current_object_start);
-        obj_data_address.object_sizes.push_back(interrupt_times[NUM_INT_TIMES-1] - current_object_start);
+        // obj_data_address.object_starts.push_back(current_object_start);
+        // obj_data_address.object_sizes.push_back(interrupt_times[NUM_INT_TIMES-1] - current_object_start);
+
+        obj_data_address.object_starts[num_objs_detected] = current_object_start;
+        obj_data_address.object_sizes[num_objs_detected] = interrupt_times[NUM_INT_TIMES-1] - current_object_start;
+        num_objs_detected++;
 
         // sensor_X_interrupt_times[0].push_back(current_object_start);
         // sensor_X_interrupt_times[1].push_back(interrupt_times[sensor_X_interrupt_times[1].size()-1] - current_object_start);
@@ -149,14 +163,15 @@ void parseInterruptsToObjects(objects_detected& obj_data_address){
 }
 
 void clearAllStoredData(){
-    myData.sensor_A_objs.object_starts.clear();
-    myData.sensor_A_objs.object_sizes.clear();
+    memset(myData.sensor_A_objs.object_starts, 0, sizeof(myData.sensor_A_objs.object_starts));
+    memset(myData.sensor_B_objs.object_starts, 0, sizeof(myData.sensor_B_objs.object_starts));
+    memset(myData.sensor_C_objs.object_starts, 0, sizeof(myData.sensor_C_objs.object_starts));
 
-    myData.sensor_B_objs.object_starts.clear();
-    myData.sensor_B_objs.object_sizes.clear();
+    memset(myData.sensor_A_objs.object_sizes, 0, sizeof(myData.sensor_A_objs.object_sizes));
+    memset(myData.sensor_B_objs.object_sizes, 0, sizeof(myData.sensor_B_objs.object_sizes));
+    memset(myData.sensor_C_objs.object_sizes, 0, sizeof(myData.sensor_C_objs.object_sizes));
+    
 
-    myData.sensor_C_objs.object_starts.clear();
-    myData.sensor_C_objs.object_sizes.clear();
 }
 
 void printAllInterrupts(){
@@ -174,12 +189,11 @@ void printAllInterrupts(){
         Serial.println("m");
     }
 }
-
+/*
 void printObjectsDetected(){
-    int num_A_detects = myData.sensor_A_objs.object_starts.size();
     Serial.print("Num Sensor A objects: ");
     Serial.println(num_A_detects);
-    for (int i = 0; i < num_A_detects; i++){
+    for (int i = 0; i < MAX_NUM_OBJECTS; i++){
         Serial.print(myData.sensor_A_objs.object_starts[i]);
         Serial.print(" : ");
         Serial.print(myData.sensor_A_objs.object_sizes[i]);
@@ -205,8 +219,8 @@ void printObjectsDetected(){
         Serial.print(myData.sensor_C_objs.object_sizes[i]);
         Serial.println();
     }
-
 }
+*/
 
 void collectSensorData(){
 
@@ -249,16 +263,16 @@ void collectSensorData(){
     // interrupt_times.clear();
     // total_interrupt_count = 0;
 
-    attachInterrupt(sensor_A_interruptPin, reflectionDetect, RISING);
+    attachInterrupt(sensor_C_interruptPin, reflectionDetect, HIGH);
 
-    pulseTrigPinX(sensor_A_trigPin);
+    pulseTrigPinX(sensor_C_trigPin);
     delay(60);
 
-    detachInterrupt(sensor_A_interruptPin);
+    detachInterrupt(sensor_C_interruptPin);
 
-    parseInterruptsToObjects(myData.sensor_A_objs);
+    parseInterruptsToObjects(myData.sensor_C_objs);
 
-    printObjectsDetected();
+    // printObjectsDetected();
 
 }
 
@@ -310,7 +324,7 @@ void setup(){
     pinMode(sensor_B_trigPin, OUTPUT);
     pinMode(sensor_C_trigPin, OUTPUT);
 
-    // attachInterrupt(sensor_A_interruptPin, reflectionDetect, RISING);
+    // attachInterrupt(sensor_A_interruptPin, reflectionDetect, HIGH);
 
     // COMMUNICATIONS SETUP
 
@@ -344,9 +358,9 @@ void setup(){
 
 
 void loop(){
-    collectSensorData();
+    // collectSensorData();
 
-    delay(5000);
+    // delay(5000);
 }
 
 /*
