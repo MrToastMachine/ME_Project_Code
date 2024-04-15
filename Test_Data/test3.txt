@@ -1,0 +1,359 @@
+--- Terminal on /dev/cu.usbserial-1110 | 115200 8-N-1
+--- Available filters and text transformations: colorize, debug, default, direct, esp32_exception_decoder, hexlify, log2file, nocontrol, printable, send_on_enter, time
+--- More details at https://bit.ly/pio-monitor-filters
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 572
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.10 : 125
+1.14 : 50
+Sensor B objects: 
+1.08 : 374
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 948
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 474
+1.24 : 26
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.10 : 447
+1.99 : 19
+Sensor B objects: 
+1.07 : 473
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 948
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 549
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.10 : 324
+Sensor B objects: 
+1.08 : 372
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 923
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 573
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 400
+Sensor B objects: 
+1.08 : 421
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 922
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 570
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.01 : 6
+1.09 : 226
+1.14 : 24
+Sensor B objects: 
+1.08 : 422
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 924
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 596
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 326
+Sensor B objects: 
+1.08 : 398
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 924
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.16 : 472
+Sensor C objects: 
+1.18 : 75
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 352
+1.16 : 26
+Sensor B objects: 
+1.08 : 422
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 924
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 573
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 303
+Sensor B objects: 
+1.08 : 372
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 950
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 447
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 226
+1.14 : 146
+1.17 : 99
+Sensor B objects: 
+1.08 : 468
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 947
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 521
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 351
+Sensor B objects: 
+1.08 : 422
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 924
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 573
+Sensor C objects: 
+1.19 : 25
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 400
+Sensor B objects: 
+1.08 : 395
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 921
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 573
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.09 : 401
+Sensor B objects: 
+1.08 : 422
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 948
+Sensor C objects: 
+
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+
+Last Packet Send Status:	Delivery Success
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 522
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+1.10 : 347
+Sensor B objects: 
+1.08 : 422
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.79 : 923
+Sensor C objects: 
+

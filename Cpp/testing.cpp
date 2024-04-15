@@ -3,51 +3,25 @@
 
 using namespace std;
 
-int test1[5];
-int test2[5];
-int test3[5];
+int test[5] = [];
 
-int current_test = 2;
+
+void gg_copyToNewVector(vector<int>& new_vect){
+    for (int i = 0; i < vect.size(); i++){
+        new_vect.push_back(vect[i]);
+    }
+}
+
+double getDistFromMicros(int uS_val){
+    double c = 343.0; // Speed of sound m/s
+    return c * uS_val / 2000000.0;
+}
 
 int main(int argc, char const *argv[]) {
 
-    int data[5] = {1,2,3,4,5};
 
-    switch (current_test)
-    {
-    case 1:
-        memcpy(&test1, data, sizeof(test1));
-        break;
-
-    case 2:
-        memcpy(&test2, data, sizeof(test2));
-        break;
-    
-    case 3:
-        memcpy(&test2, data, sizeof(test2));
-        break;
-    
-    default:
-        break;
+    for (int i = 0; i < uS.size(); i++){
+        cout<<uS[i] << " : " << getDistFromMicros(uS[i]) <<endl;
     }
 
-    data[3] = 55;
-
-    cout<<"TEST 1 ARRAY..."<<endl;
-    for (int i = 0; i < 5; i++){
-        cout<<i<<" : "<<test1[i]<<endl;
-    }
-    cout<<endl;
-
-    cout<<"TEST 1 ARRAY..."<<endl;
-    for (int i = 0; i < 5; i++){
-        cout<<i<<" : "<<test2[i]<<endl;
-    }
-    cout<<endl;
-
-    cout<<"TEST 1 ARRAY..."<<endl;
-    for (int i = 0; i < 5; i++){
-        cout<<i<<" : "<<test3[i]<<endl;
-    }
-    cout<<endl;
 }
