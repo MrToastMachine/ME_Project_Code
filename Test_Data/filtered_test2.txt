@@ -1,0 +1,295 @@
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.21 : 27
+1.23 : 270
+Sensor B objects: 
+1.22 : 372
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.70 : 842
+Sensor B objects: 
+0.72 : 594
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 447
+Sensor C objects: 
+0.80 : 569
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.21 : 347
+Sensor B objects: 
+1.22 : 399
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.64 : 14
+0.71 : 727
+0.84 : 24
+Sensor B objects: 
+0.72 : 668
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 127
+0.83 : 290
+Sensor C objects: 
+0.80 : 565
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 320
+Sensor B objects: 
+1.22 : 348
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 821
+Sensor B objects: 
+0.72 : 644
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 423
+Sensor C objects: 
+0.80 : 593
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 367
+Sensor B objects: 
+1.21 : 448
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 871
+Sensor B objects: 
+0.72 : 668
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 425
+Sensor C objects: 
+0.80 : 541
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 224
+Sensor B objects: 
+1.22 : 324
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 869
+Sensor B objects: 
+0.72 : 644
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 449
+Sensor C objects: 
+0.80 : 593
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.21 : 345
+Sensor B objects: 
+1.22 : 372
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.43 : 34
+0.47 : 31
+0.71 : 871
+Sensor B objects: 
+0.72 : 645
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 422
+Sensor C objects: 
+0.80 : 567
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 199
+Sensor B objects: 
+1.22 : 348
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 726
+0.84 : 24
+Sensor B objects: 
+0.72 : 619
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 499
+Sensor C objects: 
+0.80 : 592
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 273
+Sensor B objects: 
+1.22 : 349
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 893
+Sensor B objects: 
+0.72 : 643
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 423
+Sensor C objects: 
+0.80 : 591
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.21 : 349
+Sensor B objects: 
+1.22 : 398
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 798
+Sensor B objects: 
+0.72 : 642
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 473
+Sensor C objects: 
+0.80 : 617
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 319
+Sensor B objects: 
+1.22 : 375
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.59 : 3
+0.71 : 819
+Sensor B objects: 
+0.72 : 619
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.81 : 423
+Sensor C objects: 
+0.80 : 594
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+1.22 : 322
+1.28 : 25
+Sensor B objects: 
+1.22 : 374
+Sensor C objects: 
+
+Data from board 02: 
+Sensor A objects: 
+0.71 : 874
+Sensor B objects: 
+0.72 : 619
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 474
+Sensor C objects: 
+0.80 : 568
+

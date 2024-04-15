@@ -1,0 +1,300 @@
+
+
+
+Data collected from all boards
+
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 845
+Sensor C objects: 
+0.82 : 327
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 323
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 650
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 820
+Sensor C objects: 
+0.82 : 349
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 322
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 649
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 869
+Sensor C objects: 
+0.82 : 348
+
+Data from board 02: 
+Sensor A objects: 
+0.47 : 13
+Sensor B objects: 
+1.08 : 298
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 626
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 844
+Sensor C objects: 
+0.82 : 325
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+0.50 : 4
+1.08 : 320
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 647
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 844
+Sensor C objects: 
+0.82 : 326
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 299
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 648
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 845
+Sensor C objects: 
+0.82 : 350
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.07 : 349
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 649
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 844
+Sensor C objects: 
+0.82 : 349
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 372
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 649
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 845
+Sensor C objects: 
+0.82 : 349
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 297
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 672
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 845
+Sensor C objects: 
+0.83 : 250
+
+Data from board 02: 
+Sensor A objects: 
+0.43 : 21
+0.44 : 17
+0.47 : 7
+Sensor B objects: 
+1.08 : 275
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 672
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+0.60 : 27
+Sensor B objects: 
+0.80 : 845
+Sensor C objects: 
+0.82 : 324
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 299
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 673
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 820
+Sensor C objects: 
+0.82 : 323
+
+Data from board 02: 
+Sensor A objects: 
+0.67 : 3
+Sensor B objects: 
+1.08 : 324
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 648
+Sensor C objects: 
+
+
+
+
+Data collected from all boards
+
+Data from board 01: 
+Sensor A objects: 
+Sensor B objects: 
+0.80 : 822
+Sensor C objects: 
+0.82 : 326
+
+Data from board 02: 
+Sensor A objects: 
+Sensor B objects: 
+1.08 : 322
+Sensor C objects: 
+
+Data from board 03: 
+Sensor A objects: 
+Sensor B objects: 
+1.15 : 599
+Sensor C objects: 
+
+
