@@ -48,13 +48,18 @@ def extract_sensor_data(filename):
 
     return test_data
 
-test_dir = 'Test_Data/'
-# Example usage
-file_path = test_dir + 'filtered_test1.txt'  # Specify the path to your file here
-sensor_data = extract_sensor_data(file_path)
+if __name__=="__main__":
+    test_num = 10
 
-# all_data = pd.DataFrame(sensor_data)
-# # df.to_excel(test_dir + 'TEST01_READINGS.xlsx')
+    test_dir = 'Test_Data/'
+    # Example usage
+    file_path = test_dir + f'filtered_test{test_num}.txt'  # Specify the path to your file here
+    sensor_data = extract_sensor_data(file_path)
+
+    df = pd.DataFrame(sensor_data)
+
+    all_data = pd.DataFrame(sensor_data)
+    df.to_excel(test_dir + f'TEST0{test_num}_READINGS.xlsx')
 
 
 

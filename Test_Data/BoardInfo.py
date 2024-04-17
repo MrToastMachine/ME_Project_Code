@@ -18,6 +18,10 @@ class Board:
         self.sensorB = Sensor(self, 'B')
         self.sensorC = Sensor(self, 'C')
 
+    def clearSensorData(self):
+        for s in self.all_sensors:
+            s.detections = []
+
     
 
 class Sensor:
@@ -30,7 +34,7 @@ class Sensor:
         elif sensor_id == 'B':
             self.angle = parent_board.angle - (np.pi / 4) # 45 degrees
         elif sensor_id == 'C':
-            self.angle = parent_board.angle - (np.pi / 3) # 60 degrees
+            self.angle = parent_board.angle - ((5 * np.pi) / 12) # 75 degrees
 
         self.posX = parent_board.posX + (np.cos(self.angle) * SENSOR_DIST_TO_ORIGIN)
         self.posY = parent_board.posY + (np.sin(self.angle) * SENSOR_DIST_TO_ORIGIN)
@@ -44,18 +48,18 @@ class Sensor:
     def printInfo(self):
         print(f"b{self.parent_board.id}s{self.sensor_id} : {self.detections}")
         print(f"Pos: {self.posX}, {self.posY}")
-        print(f"Angle: {self.angle}")
+        angle_deg = (self.angle / np.pi) * 180
+        print(f"Angle: {angle_deg}")
 
 
-# b1 = Board(1, (1.6,0), np.pi)
-# b2 = Board(2, (0, 0), np.pi/2)
-# b3 = Board(3, (0,1.6), 0)
+b1 = Board(1, (1.6,0), np.pi)
+b2 = Board(2, (0, 0), np.pi/2)
+b3 = Board(3, (0,1.6), 0)
+
+def test(a, b, c):
+    c  += (a * b)
+
+    return a,b,c
 
 if __name__=="__main__":
-    x = [(3.2,4), (6.8,8)]
-    data = [5.6]
-
-    if len(x) > 0:
-        data.extend([i[0] for i in x])
-
-    print(data)
+   print([x for x in range(1,8)])
